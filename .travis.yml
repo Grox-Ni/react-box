@@ -1,3 +1,10 @@
-language: generic
+language: node_js
 services: docker
-script: docker run -v=$(pwd):/app --workdir=/app coala/base coala --ci
+node_js: lts/*
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm i --save-dev
+  - npm i -g eslint@^4.1.1
+script: docker run -ti -v $(pwd):/app -e PATH=PATH=/usr/local/bin:/usr/bin:/bin:/app/node_modules/.bin/ --workdir=/app coala/base coala --ci
