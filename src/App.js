@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved, import/no-extraneous-dependencies */
 import React, { Component } from 'react'
 import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
 import getWeb3 from './utils/getWeb3'
@@ -31,7 +32,8 @@ class App extends Component {
       this.instantiateContract()
     })
     .catch(() => {
-      console.log('Error finding web3.')
+/* eslint-disable no-console */
+      console.error('Error finding web3.')
     })
   }
 
@@ -57,7 +59,7 @@ class App extends Component {
 
         // Stores a given value, 5 by default.
         return simpleStorageInstance.set(5, {from: accounts[0]})
-      }).then((result) => {
+      }).then(() => {
         // Get the value from the contract to prove it worked.
         return simpleStorageInstance.get.call(accounts[0])
       }).then((result) => {
@@ -68,10 +70,11 @@ class App extends Component {
   }
 
   render() {
+/* eslint-disable jsx-a11y/anchor-is-valid */
     return (
       <div className="App">
         <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
+          <a className="pure-menu-heading pure-menu-link">Truffle Box</a>
         </nav>
 
         <main className="container">

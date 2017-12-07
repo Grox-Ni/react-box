@@ -8,6 +8,7 @@ ignore = config/**, src/fonts/**, migrations/**, node_modules/**, src/utils/**
 es_version = 6
 bears = ESLintBear
 files = src/**.js
+ignore += src/App.test.js
 
 [all.javascript.filename]
 file_naming_convention = pascal
