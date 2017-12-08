@@ -6,10 +6,15 @@ cache:
     - "node_modules"
 install:
   - npm i --save-dev
-  - npm i -g eslint@^4.1.1
-script: >-
-  docker run -ti -v $(pwd):/app
-  -e PATH=PATH=/usr/local/bin:/usr/bin:/bin:/app/node_modules/.bin/
-  --workdir=/app
-  coala/base
-  coala --ci
+  - npm i -g eslint@^4.1.1 codecov
+  - truffle compile
+script:
+  - truffle test
+  - npm test --watchAll
+  - |
+    docker run -ti -v $(pwd):/app \
+    -e PATH=PATH=/usr/local/bin:/usr/bin:/bin:/app/node_modules/.bin/ \
+    --workdir=/app \
+    coala/base \
+    coala --ci
+  - codecov
